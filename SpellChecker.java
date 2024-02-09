@@ -57,7 +57,11 @@ public class SpellChecker {
 		for (int i = 0; i < dictionary.length; i++){
 
 			
-
+				/*
+				The method might not always return the closest match since it breaks at the first word in the dictionary 
+				that satisfies the threshold condition. It should iterate through the entire dictionary and return the word
+				with the minimum Levenshtein distance that satisfies the threshold condition.
+					*/
 				if (threshold >= levenshtein(word, dictionary[i])) {
 					mostSimilar = dictionary[i];
 					break;
