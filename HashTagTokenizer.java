@@ -1,4 +1,4 @@
-
+import java.lang.annotation.Retention;
 
 public class HashTagTokenizer {
 
@@ -13,14 +13,25 @@ public class HashTagTokenizer {
 		String[] dictionary = new String[3000];
 
 		In in = new In(fileName);
-
-		// Your code here
+		
+		for (int i = 0; i<dictionary.length; i++){
+			dictionary[i] = in.readLine();
+		}
 
 		return dictionary;
 	}
 
 	public static boolean existInDictionary(String word, String []dictionary) {
-		// Your code here
+		boolean exist = false;
+
+		for (int i = 0; i < dictionary.length; i++ ){
+			if (word.equals(dictionary[i])) {
+				exist = true;
+				break;
+			}
+		} 
+		return exist;
+	
 	}
 
 	public static void breakHashTag(String hashtag, String[] dictionary) {
@@ -29,11 +40,18 @@ public class HashTagTokenizer {
         if (hashtag.isEmpty()) {
             return;
         }
+
+		hashtag = hashtag.toLowerCase();
  
         int N = hashtag.length();
+		int indexZero = 0;
 
         for (int i = 1; i <= N; i++) {
-		
+			String currentString = hashtag.substring(indexZero, i);
+			if (existInDictionary(currentString, dictionary)) {
+				System.out.println(currentString);
+				indexZero = i;
+			}
         }
     }
 
